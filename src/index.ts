@@ -4,14 +4,14 @@ import express, { Application } from 'express';
 import { PORT as port } from './config';
 
 // Router
-// import poRouter from './routers/po.router';
+import purchaseOrderRouter from './routers/purchase-orders.router';
 
 const PORT = port || 3050;
 const app: Application = express();
 
 app.use(express.json());
 
-// app.use("/purchase-orders", poRouter);
+app.use("/purchase-orders", purchaseOrderRouter);
 
 
 app.listen(PORT, () => {
