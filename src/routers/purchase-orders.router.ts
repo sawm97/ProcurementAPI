@@ -1,14 +1,10 @@
 import { Router } from "express";
 
+import Controller from "../controllers/purchase-orders.controller";
+
 const router = Router();
 
 // Create a new Purchase Order
-router.post("/", (req, res) => {
-    try {
-        res.status(201).send("Purchase Order created successfully.");
-    } catch (err) {
-        res.status(500).send(err);
-    }
-});
+router.post("/", Controller.createPurchaseOrder);
 
 export default router
