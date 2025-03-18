@@ -6,7 +6,7 @@ import { PORT as port } from './config';
 // Router
 // import poRouter from './routers/po.router';
 
-const PORT = port || 3030;
+const PORT = port || 3050;
 const app: Application = express();
 
 app.use(express.json());
