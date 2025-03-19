@@ -1,7 +1,7 @@
 import { error } from "console";
 import { NextFunction, Request, Response } from "express";
 
-export class HttpExeception extends Error {
+export class HttpException extends Error {
     public status: number;
     public message: string;
 
@@ -13,7 +13,7 @@ export class HttpExeception extends Error {
 }
 
 export const ErrorMiddleware = (
-    error: HttpExeception,
+    error: HttpException,
     req: Request,
     res: Response,
     next: NextFunction

@@ -1,15 +1,28 @@
-import express, { Application } from 'express';
-// import { ProcurementDB } from './data-source';
-
 import { PORT as port } from './config';
+import express, { Application } from 'express';
+import morgan from 'morgan';
+import fs from 'fs';
+import path from 'path';
 
 // Router
 import purchaseOrderRouter from './routers/purchase-orders.router';
 
+// Middleware
+import { ErrorMiddleware } from './middlewares/error.middleware';
+
 const PORT = port || 3050;
 const app: Application = express();
 
+// Middleware
 app.use(express.json());
+app.use(
+    morgan("combined", {
+        stream: fs.createWriteStream(path.join(__dirname, "access.log")),
+    }
+));
+
+// Error handling middleware
+app.use(ErrorMiddleware);
 
 app.use("/purchase-orders", purchaseOrderRouter);
 
