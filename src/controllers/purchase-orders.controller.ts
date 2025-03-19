@@ -28,9 +28,25 @@ async function getAllPurchaseOrder(req: Request, res: Response, next: NextFuncti
     }
 }
 
+// Get Purchase Order by Id
+async function getPurchaseOrderById(req: Request, res: Response, next: NextFunction) {
+    try {
+        const id = parseInt(req.params.id);
+        const data = await PurchaseOrderService.getPurchaseOrderById(id)
+
+        res.status(200).json({
+            purchaseOrders: data
+        })
+    } catch (err) {
+        res.status(500).send(err);
+    }
+}
+
+
 const Controller = {
     createPurchaseOrder,
-    getAllPurchaseOrder
+    getAllPurchaseOrder,
+    getPurchaseOrderById
 };
 
 export default Controller;

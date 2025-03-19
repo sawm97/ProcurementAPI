@@ -101,7 +101,31 @@ async function getAllPurchaseOrder() {
 
         return purchaseOrders
     } catch (err) {
-        console.error("Error get all purchase order:", err)
+        console.error("Error get all purchase orders:", err)
+        throw err;
+    }
+}
+
+// Get Purchase Order by Id
+async function getPurchaseOrderById(id: number) {
+    try {
+        const purchaseOrder = await ProcurementDB.createQueryBuilder(ProcurementOrder, "procurementOrder")
+        .innerJoinAndSelect("procurementOrder.purchaseRequest", "purchaseRequest")
+        .innerJoinAndSelect("purchaseRequest.item", "item")
+        .select([
+            "purchaseRequest.id AS id",
+            "item.name AS itemName",
+            "item.category AS category",
+            "purchaseRequest.quantity AS quantity",
+            "procurementOrder.supplier AS supplier",
+            "purchaseRequest.status AS status"
+        ])
+        .where("purchaseRequest.id = :id", { id: id })
+        .execute();
+
+        return purchaseOrder
+    } catch (err) {
+        console.error("Error get purchase order by id:", err)
         throw err;
     }
 }
@@ -109,7 +133,8 @@ async function getAllPurchaseOrder() {
 
 const PurchaseOrdersService = {
     createPurchaseOrder,
-    getAllPurchaseOrder
+    getAllPurchaseOrder,
+    getPurchaseOrderById
 };
 
 export default PurchaseOrdersService;
