@@ -1,14 +1,14 @@
-import e from "express";
 import { Entity, Column, PrimaryGeneratedColumn, DeleteDateColumn, OneToOne, JoinColumn } from "typeorm";
 import { Item } from "./item.entity";
+import { ProcurementOrder } from "./po.entity";
 
 @Entity({ name: "purchaseRequest" })
 export class PurchaseRequest {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @OneToOne(() => Item) // Relasi One-to-One dengan entitas Item
-    @JoinColumn({ name: "itemId" }) // Menentukan kolom foreign key di tabel purchaseRequest
+    @OneToOne(() => Item, (item) => item.purchaseRequest)
+    @JoinColumn({ name: "itemId" })
     item: Item;
 
     @Column()
@@ -22,4 +22,8 @@ export class PurchaseRequest {
 
     @DeleteDateColumn()
     deletedAt: Date;
+
+    @OneToOne(() => ProcurementOrder, (procurementOrder) => procurementOrder.purchaseRequest)
+    procurementOrder: ProcurementOrder;
+    
 }
