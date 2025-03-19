@@ -15,7 +15,7 @@ export class PurchaseRequest {
     quantity: number;
 
     @Column()
-    status: string; // Status of the purchase request (e.g. "pending", "approved", "rejected")
+    status: string; // Status of the purchase request (e.g. "Pending", "Approved", "Rejected")
 
     @Column()
     requestDate: Date;
