@@ -1,5 +1,5 @@
 import e from "express";
-import { Entity, Column, PrimaryGeneratedColumn, DeleteDateColumn, OneToOne } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, DeleteDateColumn, OneToOne, JoinColumn } from "typeorm";
 import { Item } from "./item.entity";
 
 @Entity({ name: "purchaseRequest" })
@@ -7,7 +7,8 @@ export class PurchaseRequest {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @OneToOne(() => Item, item => item.id)
+    @OneToOne(() => Item) // Relasi One-to-One dengan entitas Item
+    @JoinColumn({ name: "itemId" }) // Menentukan kolom foreign key di tabel purchaseRequest
     item: Item;
 
     @Column()
