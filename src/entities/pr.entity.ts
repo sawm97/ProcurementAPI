@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, DeleteDateColumn, OneToOne, JoinColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, DeleteDateColumn, OneToOne, ManyToOne } from "typeorm";
 import { Item } from "./item.entity";
 import { ProcurementOrder } from "./po.entity";
 
@@ -7,8 +7,7 @@ export class PurchaseRequest {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @OneToOne(() => Item, (item) => item.purchaseRequest)
-    @JoinColumn({ name: "itemId" })
+    @ManyToOne(() => Item, (item) => item.purchaseRequest)
     item: Item;
 
     @Column()
