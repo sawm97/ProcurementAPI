@@ -1,5 +1,5 @@
 export default interface IPurchaseRequest{
-    id: string; // ID of the purchase request (UUID)
+    id: number; // ID of the purchase request
     itemId: string; // ID of the item being requested
     quantity: number; // Quantity of the item being requested
     status: string; // Status of the purchase request (e.g. "pending", "approved", "rejected")

@@ -1,5 +1,5 @@
 export default interface IProcurementOrder{
-    id: string; // ID of the procurement order (UUID)
+    id: number; // ID of the procurement order
     purchaseRequestId: string; // ID of the purchase request associated with the procurement order
     supplier: string; // Name of the supplier
     orderDate: Date; // Date the procurement order was made
