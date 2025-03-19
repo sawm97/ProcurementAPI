@@ -4,10 +4,8 @@ import morgan from 'morgan';
 import fs from 'fs';
 import path from 'path';
 
-// Router
 import purchaseOrderRouter from './routers/purchase-orders.router';
 
-// Middleware
 import { ErrorMiddleware } from './middlewares/error.middleware';
 
 const PORT = port || 3050;
@@ -17,14 +15,15 @@ const app: Application = express();
 app.use(express.json());
 app.use(
     morgan("combined", {
-        stream: fs.createWriteStream(path.join(__dirname, "access.log")),
+        stream: fs.createWriteStream(path.join(__dirname, "access.log"), { flags: "a" }),
     }
 ));
 
+// Router
+app.use("/purchase-orders", purchaseOrderRouter);
+
 // Error handling middleware
 app.use(ErrorMiddleware);
-
-app.use("/purchase-orders", purchaseOrderRouter);
 
 
 app.listen(PORT, () => {
