@@ -27,14 +27,6 @@ app.use("/purchase-orders", purchaseOrderRouter);
 app.use(ErrorMiddleware);
 
 
-// app.listen(PORT, () => {
-//     try {
-//         console.log(`Server is running on http://localhost:${PORT}`);
-//     } catch (error) {
-//         throw error
-//     }
-// });
-
 ProcurementDB.initialize()
     .then(() => {
         app.listen(PORT, () => {

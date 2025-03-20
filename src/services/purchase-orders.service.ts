@@ -15,18 +15,18 @@ async function createPurchaseOrder({ itemName, category, quantity, supplier, sta
             .where("item.name = :name AND item.category = :category", { name: itemName, category: category })
             .getOne();
 
-        if (item) {
-            // If item exists, update stock by adding quantity
-            await ProcurementDB.createQueryBuilder()
-                .update(Item)
-                .set({
-                    stock: () => "stock + :quantity", // Increment stock
-                    lastUpdated: new Date(), // Update lastUpdated
-                })
-                .where("id = :id", { id: item.id })
-                .setParameters({ quantity: quantity }) // Pass quantity as parameter
-                .execute();
-        } else {
+        if (!item) {
+        //     // If item exists, update stock by adding quantity
+        //     await ProcurementDB.createQueryBuilder()
+        //         .update(Item)
+        //         .set({
+        //             stock: () => "stock + :quantity", // Increment stock
+        //             lastUpdated: new Date(), // Update lastUpdated
+        //         })
+        //         .where("id = :id", { id: item.id })
+        //         .setParameters({ quantity: quantity }) // Pass quantity as parameter
+        //         .execute();
+        // } else {
             // If item does not exist, create a new one
             const itemResult = await ProcurementDB.createQueryBuilder()
                 .insert()

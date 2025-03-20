@@ -43,10 +43,10 @@ async function getPurchaseOrderById(req: Request, res: Response, next: NextFunct
 }
 
 
-const Controller = {
+const PurchaseOrderController = {
     createPurchaseOrder,
     getAllPurchaseOrder,
     getPurchaseOrderById
 };
 
-export default Controller;
+export default PurchaseOrderController;
